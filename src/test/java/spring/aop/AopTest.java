@@ -13,13 +13,15 @@ import spring.aop.order.aop.AspectV1;
 import spring.aop.order.aop.AspectV2;
 import spring.aop.order.aop.AspectV3;
 import spring.aop.order.aop.AspectV4Pointcut;
+import spring.aop.order.aop.AspectV5Order;
 
 @SpringBootTest
 @Slf4j
 //@Import(AspectV1.class)
 //@Import(AspectV2.class)
 //@Import(AspectV3.class)
-@Import(AspectV4Pointcut.class)
+//@Import(AspectV4Pointcut.class)
+@Import({AspectV5Order.LogAspect.class, AspectV5Order.TransactionAspect.class})
 public class AopTest {
 
     @Autowired
