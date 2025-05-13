@@ -12,7 +12,7 @@ public class AspectV5Order {
     @Aspect
     @Order(2)
     public static class LogAspect {
-        @Around("spring.aop.order.aop.PointCuts.allOrder()")
+        @Around("spring.aop.order.aop.Pointcuts.allOrder()")
         public Object doLog(ProceedingJoinPoint joinPoint) throws Throwable {
             // joinPoint.getSignature() : 메서드 시그니처를 가져옴
             log.info("[log] {}", joinPoint.getSignature());
@@ -24,7 +24,7 @@ public class AspectV5Order {
     @Order(1)
     public static class TransactionAspect {
         // spring.aop.order 하위패키지 이면서 클래스 이름 패턴이 *service
-        @Around("spring.aop.order.aop.PointCuts.orderAndService()")
+        @Around("spring.aop.order.aop.Pointcuts.orderAndService()")
         public Object doTransaction(ProceedingJoinPoint joinPoint) throws Throwable {
             try {
                 log.info("[트랜잭션 시작] {}", joinPoint.getSignature());
