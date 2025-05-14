@@ -80,19 +80,19 @@ public class ExecutionTest {
 
     @Test
     void packageExactMatch1() {
-        aspectJExpressionPointcut.setExpression("execution(*  spring.aop.member.MemberServiceImpl.hello(..))");
+        aspectJExpressionPointcut.setExpression("execution(* spring.aop.member.MemberServiceImpl.hello(..))");
         Assertions.assertThat(aspectJExpressionPointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
 
     @Test
     void packageExactMatch2() {
-        aspectJExpressionPointcut.setExpression("execution(*  spring.aop.member.*.*(..))");
+        aspectJExpressionPointcut.setExpression("execution(* spring.aop.member.*.*(..))");
         Assertions.assertThat(aspectJExpressionPointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
 
     @Test
     void packageExactFalse() {
-        aspectJExpressionPointcut.setExpression("execution(*  spring.aop.*.*(..))");
+        aspectJExpressionPointcut.setExpression("execution(* spring.aop.*.*(..))");
         Assertions.assertThat(aspectJExpressionPointcut.matches(helloMethod, MemberServiceImpl.class)).isFalse();
     }
 
@@ -104,33 +104,33 @@ public class ExecutionTest {
 
     @Test
     void packageExactSubPackage1() {
-        aspectJExpressionPointcut.setExpression("execution(*  spring.aop.member..*.*(..))");
+        aspectJExpressionPointcut.setExpression("execution(* spring.aop.member..*.*(..))");
         Assertions.assertThat(aspectJExpressionPointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
 
     @Test
     void packageExactSubPackage2() {
-        aspectJExpressionPointcut.setExpression("execution(*  spring.aop..*.*(..))");
+        aspectJExpressionPointcut.setExpression("execution(* spring.aop..*.*(..))");
         Assertions.assertThat(aspectJExpressionPointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
 
     @Test
     void typeExactMatch() {
-        aspectJExpressionPointcut.setExpression("execution(*  spring.aop.member.MemberServiceImpl.*(..))");
+        aspectJExpressionPointcut.setExpression("execution(* spring.aop.member.MemberServiceImpl.*(..))");
         Assertions.assertThat(aspectJExpressionPointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
 
     @Test
     void typeMatchSuperType() {
         // 부모타입으로 해도 true
-        aspectJExpressionPointcut.setExpression("execution(*  spring.aop.member.MemberService.*(..))");
+        aspectJExpressionPointcut.setExpression("execution(* spring.aop.member.MemberService.*(..))");
         Assertions.assertThat(aspectJExpressionPointcut.matches(helloMethod, MemberServiceImpl.class)).isTrue();
     }
 
     @Test
     void typeMatchInternal() throws NoSuchMethodException {
         // 자식타입으로 해도 true
-        aspectJExpressionPointcut.setExpression("execution(*  spring.aop.member.MemberServiceImpl.*(..))");
+        aspectJExpressionPointcut.setExpression("execution(* spring.aop.member.MemberServiceImpl.*(..))");
         Method internalMethod = MemberServiceImpl.class.getMethod("internal", String.class);
         Assertions.assertThat(aspectJExpressionPointcut.matches(internalMethod, MemberServiceImpl.class)).isTrue();
     }
@@ -138,7 +138,7 @@ public class ExecutionTest {
     @Test
     void typeMatchNoSuperTypeMethodFalse() throws NoSuchMethodException {
         // 인터페이스에 선언한 것만 매칭가능
-        aspectJExpressionPointcut.setExpression("execution(*  spring.aop.member.MemberService.*(..))");
+        aspectJExpressionPointcut.setExpression("execution(* spring.aop.member.MemberService.*(..))");
         Method internalMethod = MemberServiceImpl.class.getMethod("internal", String.class);
         Assertions.assertThat(aspectJExpressionPointcut.matches(internalMethod, MemberServiceImpl.class)).isFalse();
     }
